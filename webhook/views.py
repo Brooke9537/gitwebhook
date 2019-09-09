@@ -9,8 +9,8 @@ import os
 def index(request):
     if(request.method == 'POST'):
         postbody = request.body
-        print(type(postbody))
-        return HttpResponse(postbody)
+        result = json.loads(postbody.decode())
+        return HttpResponse(result)
     else:
         #val = os.system('sh script/gitlab_waf.sh')
         p=os.popen('sh script/gitlab_waf.sh') 
