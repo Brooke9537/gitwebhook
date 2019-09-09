@@ -1,5 +1,6 @@
 # django import
 from django.http import HttpResponse
+from django.http.response import JsonResponse
 
 # code import
 import os
