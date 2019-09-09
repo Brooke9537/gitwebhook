@@ -1,10 +1,10 @@
 # django import
 from django.http import HttpResponse
 from django.http.response import JsonResponse
-import json
 
 # code import
 import os
+import json
 
 def index(request):
     if(request.method == 'POST'):
@@ -16,6 +16,6 @@ def index(request):
         p=os.popen('sh script/gitlab_waf.sh') 
         x=p.read()
         p.close()
-        json = {'result':x}
-        return  JsonResponse(json)
+        json_res = {'result':x}
+        return  JsonResponse(json_res)
         
