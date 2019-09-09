@@ -9,5 +9,6 @@ def index(request):
     p=os.popen('sh script/gitlab_waf.sh') 
     x=p.read()
     p.close()
-    return HttpResponse(x)
+    json = {'result':x}
+    return HttpResponse(json)
     
