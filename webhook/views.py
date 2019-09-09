@@ -9,7 +9,7 @@ import os
 def index(request):
     if(request.method == 'POST'):
         postbody = request.body
-        print(postbody)
+        print(type(postbody))
         return HttpResponse(postbody)
     else:
         #val = os.system('sh script/gitlab_waf.sh')
