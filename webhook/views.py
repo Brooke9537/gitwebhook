@@ -10,5 +10,5 @@ def index(request):
     x=p.read()
     p.close()
     json = {'result':x}
-    return HttpResponse(json)
+    return  JsonResponse(json)
     
