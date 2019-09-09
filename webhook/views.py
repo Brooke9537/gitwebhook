@@ -6,10 +6,14 @@ from django.http.response import JsonResponse
 import os
 
 def index(request):
-    #val = os.system('sh script/gitlab_waf.sh')
-    p=os.popen('sh script/gitlab_waf.sh') 
-    x=p.read()
-    p.close()
-    json = {'result':x}
-    return  JsonResponse(json)
-    
+    if(request.method == 'POST'):
+        postBody = request.body
+        return HttpResponse(postBody)
+    else:
+        #val = os.system('sh script/gitlab_waf.sh')
+        p=os.popen('sh script/gitlab_waf.sh') 
+        x=p.read()
+        p.close()
+        json = {'result':x}
+        return  JsonResponse(json)
+        
