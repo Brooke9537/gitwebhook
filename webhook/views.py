@@ -4,6 +4,7 @@ from django.http.response import JsonResponse
 
 # code import
 import os
+import commands
 import json
 
 def index(request):
