@@ -8,6 +8,8 @@ import os
 import subprocess
 import json
 
+logger = logging.getLogger(__name__)
+
 def index(request):
     if(request.method == 'POST'):
         postbody = request.body
