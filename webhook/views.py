@@ -13,16 +13,19 @@ def index(request):
         result = json.loads(postbody.decode())
         refs_name = result['repository']['name']
 
-        script_file = os.popen('sh script/'+refs_name+'.sh') 
-        results = script_file.read()
-        script_file.close()
-        json_res = {'result':results}
+        # old way to run script
+        # script_file = os.popen('sh script/'+refs_name+'.sh') 
+        # results = script_file.read()
+        # script_file.close()
+
+        status ,output = subprocess.getstatusoutput('cd /opt/'+refs_name+' && git pull ')
+        json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
     else:
-        os.system('cd /opt/md && git pull ')
-        status ,output = subprocess.getstatusoutput('cd  /opt/md && git pull ')
-        #json_res = {'result':"Method not allowed!"}
+        
+        status = 1
+        output = "Method Not Allowed!"
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
