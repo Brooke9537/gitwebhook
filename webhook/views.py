@@ -4,7 +4,7 @@ from django.http.response import JsonResponse
 
 # code import
 import os
-import commands
+import subprocess
 import json
 
 def index(request):
@@ -21,7 +21,7 @@ def index(request):
         return JsonResponse(json_res)
     else:
         os.system('cd /opt/md && git pull ')
-        status ,output = commands.getstatusoutput('cd /opt/md && git pull ')
+        status ,output = subprocess.getstatusoutput('cd  /opt/md && git pull ')
         #json_res = {'result':"Method not allowed!"}
         json_res = {'status':status,'result':output}
 
