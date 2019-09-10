@@ -3,12 +3,9 @@
 from django.http.response import JsonResponse
 
 # code import
-import logging
 import os
 import subprocess
 import json
-
-logger = logging.getLogger(__name__)
 
 def index(request):
     if(request.method == 'POST'):
@@ -22,7 +19,6 @@ def index(request):
         # script_file.close()
 
         status ,output = subprocess.getstatusoutput('cd /opt/'+refs_name+' && git pull ')
-        logger.log(refs_name+"\n"+output)
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
