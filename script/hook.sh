@@ -1,6 +1,6 @@
 #!/bin/bash
 # author:Brooke(tangxu)
+# $1 refs_name
 
-cd /opt/gitwebhook
+cd /opt/$1
 git pull
-

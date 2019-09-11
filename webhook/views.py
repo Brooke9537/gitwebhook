@@ -13,13 +13,13 @@ def index(request):
         result = json.loads(postbody.decode())
         refs_name = result['repository']['name']
 
-        # old way to run script
-        # script_file = os.popen('sh script/'+refs_name+'.sh') 
-        # results = script_file.read()
-        # script_file.close()
+        
+        script_file = os.popen('sh script/hook.sh %s'%refs_name) 
+        results = script_file.read()
+        script_file.close()
 
-        status ,output = subprocess.getstatusoutput('cd /opt/'+refs_name+' && git pull ')
-        json_res = {'status':status,'result':output}
+
+        json_res = {'status':1,'result':results}
 
         return JsonResponse(json_res)
     else:
