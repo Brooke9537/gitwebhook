@@ -17,16 +17,19 @@ def index(request):
         #results = script_file.read()
         #script_file.close()
 
-        status ,output = subprocess.getstatusoutput('./script/hook.sh %s' %refs_name)
+        status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
         
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
-   # else:
-   #     
-   #     status = 0
-   #     output = "Method Not Allowed!"
-   #     json_res = {'status':status,'result':output}
-#
-   #     return JsonResponse(json_res)
+        else:
+
+            status = 0
+            output = "Method Not Allowed!"
+            json_res = {'status':status,'result':output}
+
+            status ,output = subprocess.getstatusoutput('../script/hook.sh gitwebhook')
+            json_res = {'status':status,'result':output}
+
+            return JsonResponse(json_res)
         
