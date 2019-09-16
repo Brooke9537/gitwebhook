@@ -17,7 +17,7 @@ def index(request):
         #results = script_file.read()
         #script_file.close()
 
-        status ,output = subprocess.getstatusoutput('sh script/hook.sh %s' %refs_name)
+        status ,output = subprocess.getstatusoutput('./script/hook.sh %s' %refs_name)
         
         json_res = {'status':status,'result':output}
 
