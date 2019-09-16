@@ -13,10 +13,12 @@ def index(request):
         result = json.loads(postbody.decode())
         refs_name = result['repository']['name']
         
-        #script_file = os.popen('sh script/hook.sh %s'%refs_name) 
-        #results = script_file.read()
-        #script_file.close()
+        # old way
+        # script_file = os.popen('sh script/hook.sh %s'%refs_name) 
+        # results = script_file.read()
+        # script_file.close()
 
+        # new way
         status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
         
         json_res = {'status':status,'result':output}
