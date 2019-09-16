@@ -14,17 +14,17 @@ def index(request):
         refs_name = result['repository']['name']
 
         
-        script_file = os.popen('sh script/hook.sh %s'%refs_name) 
-        results = script_file.read()
-        script_file.close()
+        #script_file = os.popen('sh script/hook.sh %s'%refs_name) 
+        #results = script_file.read()
+        #script_file.close()
 
-
-        json_res = {'status':1,'result':results}
+        status ,output = subprocess.getstatusoutput('sh script/hook.sh %s'%refs_name)
+        json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
     else:
         
-        status = 1
+        status = 0
         output = "Method Not Allowed!"
         json_res = {'status':status,'result':output}
 
