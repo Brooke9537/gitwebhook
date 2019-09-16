@@ -21,6 +21,8 @@ def index(request):
         # new way
         status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
         
+        output = output.encode('utf8')
+
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
