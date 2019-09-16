@@ -23,12 +23,8 @@ def index(request):
 
         return JsonResponse(json_res)
         else:
-
             status = 0
             output = "Method Not Allowed!"
-            json_res = {'status':status,'result':output}
-
-            status ,output = subprocess.getstatusoutput('../script/hook.sh gitwebhook')
             json_res = {'status':status,'result':output}
 
             return JsonResponse(json_res)
