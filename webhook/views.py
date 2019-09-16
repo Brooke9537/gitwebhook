@@ -22,10 +22,10 @@ def index(request):
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
-        else:
-            status = 0
-            output = "Method Not Allowed!"
-            json_res = {'status':status,'result':output}
+    else:
+        status = 0
+        output = "Method Not Allowed!"
+        json_res = {'status':status,'result':output}
 
-            return JsonResponse(json_res)
+        return JsonResponse(json_res)
         
