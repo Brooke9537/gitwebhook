@@ -11,6 +11,7 @@ def index(request):
     if(request.method == 'POST'):
         postbody = request.body
         result = json.loads(postbody.decode())
+        print(postbody)
         print(result)
         
         # old way
