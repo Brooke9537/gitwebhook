@@ -14,15 +14,13 @@ def index(request):
         for alert in result['alerts']:
             if alert["status"]=='resolved':
                 message = '''Status: %s
-Detail: <a href="%s">alert["annotations"]["description"]</a> 
-alert["startsAt"] 
-Recovery Date: alert["endsAt"]
-        '''
+                Detail: <a href="%s">alert["annotations"]["description"]</a> 
+                alert["startsAt"] 
+                Recovery Date: alert["endsAt"]'''
             else:
                 message = '''Status: %s
-Detail: <a href="%s">alert["annotations"]["description"]</a> 
-alert["startsAt"] 
-        '''
+                Detail: <a href="%s">alert["annotations"]["description"]</a> 
+                alert["startsAt"]'''
         status ,output = subprocess.getstatusoutput('../script/alert.sh %s' %message)
         # old way
         # script_file = os.popen('sh script/hook.sh %s'%refs_name) 
