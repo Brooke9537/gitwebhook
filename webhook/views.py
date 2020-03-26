@@ -26,7 +26,7 @@ def index(request):
         return JsonResponse(json_res)
     else:
         status = 0
-        output = "Method Not Allowed!中文测试"
+        output = "Method Not Allowed!"
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
