@@ -13,7 +13,7 @@ def index(request):
         result = json.loads(postbody.decode('utf-8'))
         for alert in result['alerts']:
             if alert["status"]=='resolved':
-                message = "Status: OK \nDetail: <a href="%s">%s</a> \n%s \nRecovery Date: %s"%(alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"],alert["endsAt"])
+                message = "Status: OK \nDetail: <a href='%s'>%s</a> \n%s \nRecovery Date: %s"%(alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"],alert["endsAt"])
             else:
                 message = "Status: PROBLEM \nDetail: <a href='%s'>%s</a> \n%s"%(alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"])
             import requests
@@ -29,10 +29,7 @@ def index(request):
 
             print(response.text.encode('utf8'))
 
-        
-        json_res = {'status':status,'result':output}
-        #print(json_res)
-        return JsonResponse(result)
+        return JsonResponse(response.text.encode('utf8'))
     else:
         status = 0
         output = "Method Not Allowed!"
