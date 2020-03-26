@@ -10,7 +10,7 @@ import json
 def index(request):
     if(request.method == 'POST'):
         postbody = request.body
-        result = json.loads(postbody.decode())
+        result = json.loads(postbody.decode('utf-8'))
         print(postbody)
         print(result)
         
