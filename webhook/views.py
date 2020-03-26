@@ -11,9 +11,19 @@ def index(request):
     if(request.method == 'POST'):
         postbody = request.body
         result = json.loads(postbody.decode('utf-8'))
-        print(postbody)
-        print(result)
-        
+        for alert in result['alerts']:
+            if alert["status"]=='resolved':
+                message = '''Status: %s
+Detail: <a href="%s">alert["annotations"]["description"]</a> 
+alert["startsAt"] 
+Recovery Date: alert["endsAt"]
+        '''
+            else:
+                message = '''Status: %s
+Detail: <a href="%s">alert["annotations"]["description"]</a> 
+alert["startsAt"] 
+        '''
+        status ,output = subprocess.getstatusoutput('../script/alert.sh %s' %message)
         # old way
         # script_file = os.popen('sh script/hook.sh %s'%refs_name) 
         # results = script_file.read()
@@ -22,8 +32,8 @@ def index(request):
         # new way
         #status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
         
-        #json_res = {'status':status,'result':output}
-
+        json_res = {'status':status,'result':output}
+        print(json_res)
         return JsonResponse(result)
     else:
         status = 0
