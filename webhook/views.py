@@ -27,9 +27,9 @@ def index(request):
 
             response = requests.request("POST", url, headers=headers, data = payload)
 
-            print(response.text.encode('utf8'))
+            print(response.text)
 
-        return JsonResponse(response.text.encode('utf8'))
+        return JsonResponse(response.text)
     else:
         status = 0
         output = "Method Not Allowed!"
