@@ -20,9 +20,9 @@ def index(request):
         result = json.loads(postbody.decode('utf-8'))
         for alert in result['alerts']:
             if alert["status"]=='resolved':
-                message = ">Status: OK \nDetail: [%s](%s) \n%s \nRecovery Date: %s"%(alert["annotations"]["description"],alert["generatorURL"],trans_time(alert["startsAt"]),trans_time(alert["endsAt"]))
+                message = "> Status: OK \nDetail: [%s](%s) \n%s \nRecovery Date: %s"%(alert["annotations"]["description"],alert["generatorURL"],trans_time(alert["startsAt"]),trans_time(alert["endsAt"]))
             else:
-                message = ">Status: PROBLEM \nDetail: [%s](%s) \n%s"%(alert["annotations"]["description"],alert["generatorURL"],trans_time(alert["startsAt"]))
+                message = "> Status: PROBLEM \nDetail: [%s](%s) \n%s"%(alert["annotations"]["description"],alert["generatorURL"],trans_time(alert["startsAt"]))
 
             url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a790cd8d-547e-4506-888d-e3401b57e695"
             payload = "{\"msgtype\": \"markdown\",\"markdown\": {\"content\": \"%s\"}}"%message
