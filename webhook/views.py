@@ -14,7 +14,7 @@ def index(request):
         for alert in result['alerts']:
             if alert["status"]=='resolved':
                 message = '''Status: %s \nDetail: <a href="%s">%s</a> \n%s \nRecovery Date: %s'''%(alert["status"],alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"],alert["endsAt"])
-            else:1
+            else:
                 message = '''Status: %s \nDetail: <a href="%s">%s</a> \n%s'''%(alert["status"],alert["generatorURL"],alert["annotations"]["description"])
         print(message)
         status ,output = subprocess.getstatusoutput('/opt/gitwebhook/script/alert.sh %s',message)
