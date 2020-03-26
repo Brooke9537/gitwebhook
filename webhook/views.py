@@ -13,18 +13,22 @@ def index(request):
         result = json.loads(postbody.decode('utf-8'))
         for alert in result['alerts']:
             if alert["status"]=='resolved':
-                message = '''Status: %s \nDetail: <a href="%s">%s</a> \n%s \nRecovery Date: %s'''%(alert["status"],alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"],alert["endsAt"])
+                message = "Status: OK \nDetail: <a href="%s">%s</a> \n%s \nRecovery Date: %s"%(alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"],alert["endsAt"])
             else:
-                message = '''Status: %s \nDetail: <a href="%s">%s</a> \n%s'''%(alert["status"],alert["generatorURL"],alert["annotations"]["description"])
-        print(message)
-        status ,output = subprocess.getstatusoutput('/opt/gitwebhook/script/alert.sh %s',message)
-        # old way
-        # script_file = os.popen('sh script/hook.sh %s'%refs_name) 
-        # results = script_file.read()
-        # script_file.close()
+                message = "Status: PROBLEM \nDetail: <a href='%s'>%s</a> \n%s"%(alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"])
+            import requests
 
-        # new way
-        #status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
+            url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a790cd8d-547e-4506-888d-e3401b57e695"
+
+            payload = "{\"msgtype\": \"text\",\"text\": {\"content\": \"%s\"}}"%message
+            headers = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+            }
+
+            response = requests.request("POST", url, headers=headers, data = payload)
+
+            print(response.text.encode('utf8'))
+
         
         json_res = {'status':status,'result':output}
         #print(json_res)
