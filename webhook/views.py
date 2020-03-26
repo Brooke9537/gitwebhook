@@ -11,7 +11,7 @@ def index(request):
     if(request.method == 'POST'):
         postbody = request.body
         result = json.loads(postbody.decode())
-        refs_name = result['repository']['name']
+        print(result)
         
         # old way
         # script_file = os.popen('sh script/hook.sh %s'%refs_name) 
@@ -19,11 +19,11 @@ def index(request):
         # script_file.close()
 
         # new way
-        status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
-        print(refs_name)
-        json_res = {'status':status,'result':output}
+        #status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
+        
+        #json_res = {'status':status,'result':output}
 
-        return JsonResponse(json_res)
+        #return JsonResponse(json_res)
     else:
         status = 0
         output = "Method Not Allowed!"
