@@ -23,7 +23,7 @@ def index(request):
         
         #json_res = {'status':status,'result':output}
 
-        #return JsonResponse(json_res)
+        return JsonResponse(result)
     else:
         status = 0
         output = "Method Not Allowed!"
