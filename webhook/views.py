@@ -13,11 +13,11 @@ def index(request):
         result = json.loads(postbody.decode('utf-8'))
         for alert in result['alerts']:
             if alert["status"]=='resolved':
-                message = '''Status: %s\ Detail: <a href="%s">alert["annotations"]["description"]</a> \alert["startsAt"] \ Recovery Date: alert["endsAt"]'''
-            else:
-                message = '''Status: %s\ Detail: <a href="%s">alert["annotations"]["description"]</a>\ alert["startsAt"]'''
+                message = '''Status: %s \nDetail: <a href="%s">%s</a> \n%s \nRecovery Date: %s'''%(alert["status"],alert["generatorURL"],alert["annotations"]["description"],alert["startsAt"],alert["endsAt"])
+            else:1
+                message = '''Status: %s \nDetail: <a href="%s">%s</a> \n%s'''%(alert["status"],alert["generatorURL"],alert["annotations"]["description"])
         print(message)
-        status ,output = subprocess.getstatusoutput('../script/alert.sh test')
+        status ,output = subprocess.getstatusoutput('/opt/gitwebhook/script/alert.sh %s',message)
         # old way
         # script_file = os.popen('sh script/hook.sh %s'%refs_name) 
         # results = script_file.read()
