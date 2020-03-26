@@ -20,7 +20,7 @@ def index(request):
 
         # new way
         status ,output = subprocess.getstatusoutput('../script/hook.sh %s' %refs_name)
-
+        print(refs_name)
         json_res = {'status':status,'result':output}
 
         return JsonResponse(json_res)
