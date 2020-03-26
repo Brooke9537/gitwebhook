@@ -20,7 +20,7 @@ def index(request):
 
             url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a790cd8d-547e-4506-888d-e3401b57e695"
 
-            payload = "{\"msgtype\": \"text\",\"text\": {\"content\": \"%s\"}}"%message
+            payload = "{\"msgtype\": \"markdown\",\"markdown\": {\"content\": \"%s\"}}"%message
             headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
             }
